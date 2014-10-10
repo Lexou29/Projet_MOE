@@ -16,7 +16,6 @@
 	<input type="submit" value="Valider"/>
 <!-- onClick="submit" -->
 </form>
-<p>Si le match n'existe pas déjà, merci de le renseigner <a href="{% url 'matchs'%}">ici</a>
-</p>
+<a href="{% url 'matchs'%}">Matchs List</a>
 
 {% endblock %}

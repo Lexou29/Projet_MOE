@@ -1,16 +1,10 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
+from django import forms
 
 # Match class
 class Match(models.Model):
     place = models.CharField(max_length=200)
-    date = models.DateField(auto_now=True)
-    sport = models.ForeignKey(Sport)
-
-    def __unicode__(self):
-	return self.sport
+    date = models.DateField(auto_now_add=True, auto_now=False)
 
     def loser(self):
         return self.participation_set.all().order_by("score")[0]
@@ -20,12 +14,13 @@ class Match(models.Model):
     
     def __unicode__(self):
         return self.place
-
-#Class permettant d'ajouter un match
+  
+# Ajout d'un match
 class MatchForm(forms.Form):
-    date = forms.DateField() 
-    lieu = forms.CharField(label="Lieu", max_length=200, widget=forms.TextInput)
-       
+	place = forms.CharField(label="Lieu du match", max_length=200, widget=forms.TextInput)
+	date = forms.DateField(label="Date")  
+	# winner = Match.winner()
+	# loser = Match.loser()
 
 
 # Player class
@@ -36,13 +31,6 @@ class Player(models.Model):
     def __unicode__(self):
         return self.name
 
-# Sport class
-class Sport(models.Model):
-    sport = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return self.sport
-
 
 # Participation Class
 class Participation(models.Model):
@@ -52,3 +40,11 @@ class Participation(models.Model):
 
     def __unicode__(self):
         return self.match.place + " " + self.player.name
+
+
+# Ajout d'une participation
+class ParticipationForm(forms.Form):
+    score = forms.IntegerField(label = "Score")
+    player = forms.ModelMultipleChoiceField(queryset=Player.objects.all())
+    match = forms.ModelMultipleChoiceField(queryset=Match.objects.all())
+
