@@ -3,8 +3,8 @@
 {% block title %}Player {{ player.name }}{% endblock %}
 
 {% block menu %}
- <li><a href="{% url 'index' %}">Home</a></li>
- <li class="active"><a href="{% url 'players2' %}">Players</a></li>
+ <!-- <li><a href="{% url 'index' %}">Home</a></li> -->
+ <li class="active"><a href="{% url 'players2' %}">Equipes</a></li>
  <li><a href="{% url 'matchs' %}">Matchs</a></li>
 {% endblock %}
 

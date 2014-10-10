@@ -20,12 +20,12 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}" />
-	<!-- Ajout datepicker -->
-	<link rel="stylesheet" href="{% static 'css/datepicker.css' %}" />
 
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+
   </head>
 
   <body>
@@ -71,9 +71,12 @@
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 	
 	<!-- Ajout datepicker -->
-	<script type="text/javascript" src="{% static 'bootstrap-datepicker.js' %}"></script>
-	
+	<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/datepicker.css' %}" />
 
+	<script type="text/javascript">
+ 	$('#datepicker').datepicker()
+	</script>
   </body>
 </html>
 

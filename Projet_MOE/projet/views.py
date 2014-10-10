@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from projet.models import *
 import json
+from django.core.urlresolvers import reverse
 
 # Index page
 def index(request):
@@ -43,11 +44,24 @@ def participationForm(request):
 	else:
 		res = ParticipationForm(request.POST)
         if res.is_valid():
-			score = res.cleaned_data["score"]
-			player = res.cleaned_data["player"]
+			score1 = res.cleaned_data["score1"]
+			player1 = res.cleaned_data["player1"]
 			match = res.cleaned_data["match"]
-			p = Participation(score=score, player=player, match=match)
-			return HttpResponseRedirect("matchs")
+			player1 = Player.objects.filter(name = player1.first())
+			match_id = match.values_list('id', flat=True)
+			match = Match.objects.filter(id = match_id.first())
+			p1 = Participation(score=score1, player=player1[0], match=match[0])
+			p1.save()
+			
+			score2 = res.cleaned_data["score2"]
+			player2 = res.cleaned_data["player2"]
+			match = res.cleaned_data["match"]
+			player2 = Player.objects.filter(name = player2.first())
+			match_id = match.values_list('id', flat=True)
+			match = Match.objects.filter(id = match_id.first())
+			p2 = Participation(score=score2, player=player2[0], match=match[0])
+			p2.save()
+			return HttpResponseRedirect(reverse("matchs"))
         
 	return render(request, "matchsForms.html",{"res":res})
 
@@ -58,10 +72,10 @@ def matchForm(request):
 	else:
 		res = MatchForm(request.POST)
         if res.is_valid():
-			lieu = res.cleaned_data["lieu"]
+			place = res.cleaned_data["place"]
 			date = res.cleaned_data["date"]
-			m = Match(lieu=lieu, date=date)
+			m = Match(place=place, date=date)
 			m.save()
-			return HttpResponseRedirect("mForm")
+			return HttpResponseRedirect(reverse("mForm"))
         
 	return render(request, "matchsForms2.html",{"res":res})

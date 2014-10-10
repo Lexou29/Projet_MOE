@@ -1,7 +1,7 @@
-<body>{% extends "index.html" %}
+{% extends "index.html" %}
 
 {% block title %}Ajout d'un match{% endblock %}
-
+{% load static %}
 <!-- {% block menu %}
 <li><a href="{% url 'index' %}">Home</a></li> 
  <li class="active"><a href="{% url 'players2' %}">Equipes</a></li>
@@ -19,8 +19,4 @@
 
 {% endblock %}
 
-<!-- Ajout datepicker -->
-	<script type="text/javascript" src="{% static 'bootstrap-datepicker.js' %}"></script>
-	<link rel="stylesheet" href="{% static 'css/datepicker.css' %}" />
 
-</body>

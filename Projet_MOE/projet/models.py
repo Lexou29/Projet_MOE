@@ -3,17 +3,23 @@ from django import forms
 
 # Match class
 class Match(models.Model):
-    place = models.CharField(max_length=200)
-    date = models.DateField(auto_now_add=True, auto_now=False)
+	place = models.CharField(max_length=200)
+	date = models.DateField(auto_now_add=True, auto_now=False)
 
-    def loser(self):
-        return self.participation_set.all().order_by("score")[0]
+	def loser(self):
+		if len(self.participation_set.all().order_by("score"))>0:
+			return self.participation_set.all().order_by("score")[0]
+		else:
+			return None
 
-    def winner(self):
-        return self.participation_set.all().order_by("score").reverse()[0]
+	def winner(self):
+		if len(self.participation_set.all().order_by("score").reverse())>0:
+			return self.participation_set.all().order_by("score").reverse()[0]
+		else:
+			return None
     
-    def __unicode__(self):
-        return self.place
+	def __unicode__(self):
+		return self.place + " " + str(self.id)
   
 # Ajout d'un match
 class MatchForm(forms.Form):
@@ -44,7 +50,9 @@ class Participation(models.Model):
 
 # Ajout d'une participation
 class ParticipationForm(forms.Form):
-    score = forms.IntegerField(label = "Score")
-    player = forms.ModelMultipleChoiceField(queryset=Player.objects.all())
-    match = forms.ModelMultipleChoiceField(queryset=Match.objects.all())
+	player1 = forms.ModelMultipleChoiceField(queryset=Player.objects.all())
+	score1 = forms.IntegerField(label = "Score")
+	player2 = forms.ModelMultipleChoiceField(queryset=Player.objects.all())
+	score2 = forms.IntegerField(label = "Score")
+	match = forms.ModelMultipleChoiceField(queryset=Match.objects.all())
 
