@@ -18,7 +18,7 @@ class Match(models.Model):
 # Ajout d'un match
 class MatchForm(forms.Form):
 	place = forms.CharField(label="Lieu du match", max_length=200, widget=forms.TextInput)
-	date = forms.DateField(label="Date")  
+	date = forms.DateField(label="Date", widget=forms.DateInput)  
 	# winner = Match.winner()
 	# loser = Match.loser()
 
@@ -44,7 +44,7 @@ class Participation(models.Model):
 
 # Ajout d'une participation
 class ParticipationForm(forms.Form):
-    score = forms.IntergerField(label = "Score")
+    score = forms.IntegerField(label = "Score")
     player = forms.ModelMultipleChoiceField(queryset=Player.objects.all())
     match = forms.ModelMultipleChoiceField(queryset=Match.objects.all())
 

@@ -47,6 +47,9 @@ def participationForm(request):
 			player = res.cleaned_data["player"]
 			match = res.cleaned_data["match"]
 			p = Participation(score=score, player=player, match=match)
+			return HttpResponseRedirect("matchs")
+        
+	return render(request, "matchsForms.html",{"res":res})
 
 #Ajout d'un match
 def matchForm(request):
@@ -59,6 +62,6 @@ def matchForm(request):
 			date = res.cleaned_data["date"]
 			m = Match(lieu=lieu, date=date)
 			m.save()
-			return HttpResponseRedirect("matchs")
+			return HttpResponseRedirect("mForm")
         
 	return render(request, "matchsForms2.html",{"res":res})

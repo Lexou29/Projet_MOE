@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+<body>{% extends "index.html" %}
 
 {% block title %}Ajout d'un match{% endblock %}
 
@@ -10,13 +10,17 @@
 
 {% block content %}
 
-<form action="/project/matchsForm/" method="post">
+<form action="/project/matchsForm2/" method="post">
 {% csrf_token %}
 {{ res.as_ul }}
 	<input type="submit" value="Valider"/>
 <!-- onClick="submit" -->
 </form>
-<p>Si le match n'existe pas déjà, merci de le renseigner <a href="{% url 'matchs'%}">ici</a>
-</p>
 
 {% endblock %}
+
+<!-- Ajout datepicker -->
+	<script type="text/javascript" src="{% static 'bootstrap-datepicker.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/datepicker.css' %}" />
+
+</body>

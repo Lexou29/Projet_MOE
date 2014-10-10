@@ -47,7 +47,18 @@ def participationForm(request):
 			player = res.cleaned_data["player"]
 			match = res.cleaned_data["match"]
 			p = Participation(score=score, player=player, match=match)
-			p.save()
-			return HttpResponseRedirect("matchs")
+
+#Ajout d'un match
+def matchForm(request):
+	if request.method == 'GET':
+		res = MatchForm()
+	else:
+		res = MatchForm(request.POST)
+        if res.is_valid():
+			lieu = res.cleaned_data["lieu"]
+			date = res.cleaned_data["date"]
+			m = Match(lieu=lieu, date=date)
+			m.save()
+			return HttpResponseRedirect("mForm")
         
-	return render(request, "matchsForms.html",{"res":res})
+	return render(request, "matchsForms2.html",{"res":res})

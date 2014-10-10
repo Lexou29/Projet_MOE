@@ -18,7 +18,7 @@ class Match(models.Model):
 # Ajout d'un match
 class MatchForm(forms.Form):
 	place = forms.CharField(label="Lieu du match", max_length=200, widget=forms.TextInput)
-	date = forms.DateField(label="Date")  
+	date = forms.DateField(label="Date", input_formats=['%m/%d/%Y','%d/%m/%Y'], widget=forms.DateInput(attrs={'size':'15','id':'datepicker'},format=["%m/%d/%Y","%d/%m/%Y"]))  
 	# winner = Match.winner()
 	# loser = Match.loser()
 
