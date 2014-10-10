@@ -15,6 +15,5 @@ urlpatterns = patterns('',
     url(r'^project/matchs/$', views.matchs, name="matchs"),
     url(r'^project/api/players/$', views.players_json, name="players_json"),
     url(r'^project/player_details/(?P<player>\w+)/$', views.player_details, name="playerDetails"),
-    
-    #url(r'^project/matchsForm/$', views.matchForm, name="mForm"),
+    url(r'^project/matchsForm/$', views.participationForm, name="mForm"),
 )
